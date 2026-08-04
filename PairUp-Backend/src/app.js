@@ -7,7 +7,7 @@ const cors = require("cors");
 
 
 const allowedOrigins = [
-  CORS_ORIGIN,
+  process.env.CORS_ORIGIN,
   "https://pair-up-mern.vercel.app",
 ];
 
