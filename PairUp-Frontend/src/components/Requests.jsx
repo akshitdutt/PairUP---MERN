@@ -3,6 +3,7 @@ import RequestCard from "./RequestCard";
 import { addRequest } from "../utils/requestSlice";
 import { useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Requests = () =>{
      
@@ -12,7 +13,7 @@ const Requests = () =>{
     const getRequests = async () => {
     try {
         const res = await axios.get(
-            "http://localhost:3000/user/requests/received",
+            `${BASE_URL}/user/requests/received`,
             { withCredentials: true }
         );
 

@@ -2,6 +2,7 @@ import { useResolvedPath } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
+import { BASE_URL } from "../utils/constants";
 
 const UserCard = ({user}) =>{
   const {firstName, lastName, age, gender, about, skills} = user;
@@ -10,7 +11,7 @@ const UserCard = ({user}) =>{
   const reviewFeed = async (status, userId) => {
     try {
         await axios.post(
-            `http://localhost:3000/request/send/${status}/${userId}`,
+            `${BASE_URL}/request/send/${status}/${userId}`,
             {},
             { withCredentials: true }
         );

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeRequest } from "../utils/requestSlice";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const RequestCard = ({request}) =>{
 console.log(request);
@@ -10,7 +11,7 @@ const dispatch = useDispatch();
     //API call through axios to accept and reject the Connection Request
     const reviewRequest = async (status, requestID) =>{
         try{
-            const res = await axios.post(`http://localhost:3000/request/review/${status}/${requestID}`, {}, 
+            const res = await axios.post(`${BASE_URL}/request/review/${status}/${requestID}`, {}, 
             {withCredentials: true});
             dispatch(removeRequest(requestID));
     }catch(err){

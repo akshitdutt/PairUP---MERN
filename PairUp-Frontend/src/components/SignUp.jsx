@@ -4,6 +4,7 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { BASE_URL } from "../utils/constants";
 
 const SignUp = () =>{
 
@@ -17,7 +18,7 @@ const SignUp = () =>{
 
     const signUp = async () =>{
         try{
-        const res = await axios.post("http://localhost:3000/signup", {
+        const res = await axios.post(`${BASE_URL}/signup`, {
             firstName, lastName, email, password
         }, {withCredentials:true});
         dispatch(addUser(res.data));

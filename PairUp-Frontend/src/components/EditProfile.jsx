@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
 
 const EditProfile = () => {
   const user = useSelector((store) => store.user);
@@ -42,7 +43,7 @@ const EditProfile = () => {
       };
 
       const res = await axios.patch(
-        "http://localhost:3000/profile/edit",
+        `${BASE_URL}/profile/edit`,
         payload,
         {
           withCredentials: true,
