@@ -39,7 +39,11 @@ authRouter.post("/login", async(req, res)=>{
     if(passwordValid){
 
         const token = await user.getJWT(); //offloaded from the UserSchema
-        res.cookie("token", token);
+            res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            });
         return res.send(user);
     }else{
         return res.status(401).send("Invalid Credentials");
@@ -50,7 +54,11 @@ authRouter.post("/login", async(req, res)=>{
 
 authRouter.post("/logout", userAuth, (req, res)=>{
     try{
-    res.clearCookie("token");
+    res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+});
     res.send("Logged Out Successfully.");
 }catch(err){
     res.status(401).send("Something Went Wrong...");

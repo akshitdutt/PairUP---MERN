@@ -6,11 +6,23 @@ const cookieParser=  require("cookie-parser");
 const cors = require("cors");
 
 
-app.use(cors({
-    origin: process.env.CORS_ORIGIN, 
+const allowedOrigins = [
+  CORS_ORIGIN,
+  "https://pair-up-mern.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-}    
-));
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
