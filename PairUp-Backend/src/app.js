@@ -6,21 +6,15 @@ const cookieParser=  require("cookie-parser");
 const cors = require("cors");
 
 
-const allowedOrigins = [
-  process.env.CORS_ORIGIN,
-  "https://pair-up-mern-akshit-dutt-s-projects.vercel.app",
-  "https://pair-up-mern-gwh7icnkl-akshit-dutt-s-projects.vercel.app",
-];
+// const allowedOrigins = [
+//   process.env.CORS_ORIGIN,
+//   "https://pair-up-mern-akshit-dutt-s-projects.vercel.app",
+//   "https://pair-up-mern-gwh7icnkl-akshit-dutt-s-projects.vercel.app",
+// ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
   })
 );
