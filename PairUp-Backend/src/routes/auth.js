@@ -20,7 +20,14 @@ authRouter.post("/signup", async (req, res)=>{
         password: passwordHash,
     });
     await user.save();
-    res.status(200).send("User Added Successfully...");
+    const token = await user.getJWT();
+    res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
+
+        res.status(201).send(user);
     }catch(err){
         res.status(400).send("ERROR : " + err.message);
     }
@@ -57,10 +64,10 @@ authRouter.post("/login", async(req, res)=>{
 authRouter.post("/logout", userAuth, (req, res)=>{
     try{
     res.clearCookie("token", {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-});
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            });
     res.send("Logged Out Successfully.");
 }catch(err){
     res.status(401).send("Something Went Wrong...");

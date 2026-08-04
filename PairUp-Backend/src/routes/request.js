@@ -17,7 +17,7 @@ requestRouter.post("/request/send/:status/:toUserID", userAuth, async (req, res)
         //validation to only allow interested and ignored as status type in the API.
         const allowedStatus = ["interested", "ignored"];
         if(!allowedStatus.includes(status)){
-            res.json({
+            return res.json({
                 message: "Invalid Status Type."
             })
         }
@@ -31,7 +31,7 @@ requestRouter.post("/request/send/:status/:toUserID", userAuth, async (req, res)
         });
 
         if(existingRequest){
-            res.json({
+            return res.json({
                 message: "Connection Request Already Exist."
             })
         }
@@ -39,7 +39,7 @@ requestRouter.post("/request/send/:status/:toUserID", userAuth, async (req, res)
         //validation to prevent request to user not in database. 
         const idExist = await User.findOne({_id: toUserID});
         if(!idExist){
-            res.status(404).json({
+            return res.status(404).json({
                 message:"User Doesn't Exist.",
             });
         }
