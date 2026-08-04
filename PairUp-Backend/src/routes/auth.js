@@ -30,12 +30,14 @@ authRouter.post("/login", async(req, res)=>{
     try{
     const {email, password} = req.body;
     const user = await User.findOne({email: email});
+    console.log("User found:", user ? user.email : "No user");
     if(!user){
         return res.status(401).send("Invalid Credentials");
     }
 
     //check for password and compare with hash in the db.
     const passwordValid = await user.validatePassword(password); //offloaded from the UserSchema 
+    console.log("Password valid:", passwordValid);
     if(passwordValid){
 
         const token = await user.getJWT(); //offloaded from the UserSchema

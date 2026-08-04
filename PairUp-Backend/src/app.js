@@ -8,7 +8,8 @@ const cors = require("cors");
 
 const allowedOrigins = [
   process.env.CORS_ORIGIN,
-  "https://pair-up-mern.vercel.app",
+  "https://pair-up-mern-akshit-dutt-s-projects.vercel.app",
+  "https://pair-up-mern-gwh7icnkl-akshit-dutt-s-projects.vercel.app",
 ];
 
 app.use(
@@ -32,9 +33,9 @@ const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
 
-app.use(authRouter);
-app.use(profileRouter);
-app.use(requestRouter);
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
 app.use("/", userRouter);
 
 
