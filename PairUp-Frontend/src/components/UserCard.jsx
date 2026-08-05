@@ -25,7 +25,7 @@ const UserCard = ({user}) =>{
 
     return(
         <div className="card bg-base-200 w-96 shadow-sm">
-  <figure>
+  <figure className="h-96">
     <img
       src={user.photoURL || dummyAvatar}
       alt="phpto" 
