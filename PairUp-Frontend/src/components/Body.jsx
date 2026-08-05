@@ -5,10 +5,12 @@ import { addUser } from "../utils/userSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { useState } from "react";
 
 const Body = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const fetchUser = async () =>{
         try{
@@ -18,13 +20,19 @@ const Body = () =>{
         }catch(err){
            navigate("/login");
            console.error(err);
-        };
+        }finally {
+        setLoading(false);
+    }
     };
 
 //use useEffect() here, allows a function to load first thing after reloading a page. 
 useEffect(()=>{
     fetchUser();
 }, []);
+
+    if (loading) {
+    return <div>Loading...</div>;
+}
 
     return(
         <>
