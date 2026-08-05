@@ -1,11 +1,14 @@
 import { useSelector } from "react-redux";
+import dummyAvatar from "../assets/dummy-avatar.png"
+
+
 const ConnectionCard = ({ user }) => {
   console.log(user);
     return (
         <div className="card bg-base-200 shadow-xl">
             <figure className="h-60">
                 <img
-                    src={user.photoURL}
+                    src={user.photoURL || dummyAvatar}
                     alt={user.firstName}
                     className="w-full h-full object-cover object-[50%_20%]"
                 />

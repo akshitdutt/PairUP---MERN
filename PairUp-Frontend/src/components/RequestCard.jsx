@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeRequest } from "../utils/requestSlice";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import dummyAvatar from "../assets/dummy-avatar.png"
 
 const RequestCard = ({request}) =>{
 console.log(request);
@@ -24,7 +25,7 @@ const dispatch = useDispatch();
         <div className="card bg-base-200 shadow-xl">
             <figure className="h-60">
                 <img
-                    src={user.photoURL}
+                    src={user.photoURL || dummyAvatar}
                     alt={user.firstName}
                     className="w-full h-full object-cover object-[50%_20%]"
                 />

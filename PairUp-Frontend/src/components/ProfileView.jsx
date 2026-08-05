@@ -2,6 +2,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import dummyAvatar from "../assets/dummy-avatar.png"
 
 const ProfileView = () => {
   const user = useSelector((store) => store.user);
@@ -25,7 +26,7 @@ const ProfileView = () => {
             <div className="avatar">
               <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4">
                 <img
-                  src={user.photoURL}
+                  src={user.photoURL || dummyAvatar}
                   alt="profile"
                 />
               </div>

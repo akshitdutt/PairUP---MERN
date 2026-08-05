@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
 import { BASE_URL } from "../utils/constants";
+import dummyAvatar from "../assets/dummy-avatar.png"
 
 const UserCard = ({user}) =>{
   const {firstName, lastName, age, gender, about, skills} = user;
@@ -26,7 +27,7 @@ const UserCard = ({user}) =>{
         <div className="card bg-base-200 w-96 shadow-sm">
   <figure>
     <img
-      src={user.photoURL}
+      src={user.photoURL || dummyAvatar}
       alt="phpto" />
   </figure>
   <div className="card-body">
