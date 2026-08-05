@@ -49,7 +49,7 @@ const NavBar = () =>{
         <span className="badge badge-xs badge-primary indicator-item"></span>
       </div>
     </Link>)}
-  </div>)
+  </div>
 </div>
     )
 };
