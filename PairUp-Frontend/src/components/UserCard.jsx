@@ -28,7 +28,8 @@ const UserCard = ({user}) =>{
   <figure>
     <img
       src={user.photoURL || dummyAvatar}
-      alt="phpto" />
+      alt="phpto" 
+      className="w-full h-full object-cover object-[50%_20%]"/>
   </figure>
   <div className="card-body">
     <h2 className="card-title">{firstName+ " "+ lastName}</h2>
