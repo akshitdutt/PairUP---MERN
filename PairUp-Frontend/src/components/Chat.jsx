@@ -46,6 +46,7 @@ const Chat = () =>{
 
 
     const sendMessage = () =>{
+        if (!newMessage.trim()) return;
         const socket = createSocketConnection();
         socket.emit("sendMessage", {
             userId, 
@@ -58,54 +59,65 @@ const Chat = () =>{
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
     
-    <div className="card bg-base-100 w-full max-w-5xl h-[85vh] shadow-2xl">
-        
-        <div className="card-body p-0">
-            
-            {/* Chat Header */}
-            <div className="p-5 border-b">
-                <h2 className="card-title">{targetUser?.firstName} {targetUser?.lastName}</h2>
-                <p className="text-sm text-gray-500">Online</p>
-            </div>
+    <div className="card bg-base-100 w-full max-w-5xl h-[85vh] shadow-2xl overflow-hidden">
 
-            <div className="flex-1 overflow-y-auto p-5">
+    <div className="card-body p-0 h-full min-h-0">
 
-    {messages.map((message, index) => (
-        <div
-            key={index}
-            className={`chat ${
-                message.senderId === userId
-                    ? "chat-end"
-                    : "chat-start"
-            }`}
-        >
-            <div className="chat-bubble">
-                {message.text}
-            </div>
-            </div>
-        ))}
+        {/* Chat Header */}
+        <div className="p-5 border-b shrink-0">
+            <h2 className="card-title">
+                {targetUser?.firstName} {targetUser?.lastName}
+            </h2>
 
+            <p className="text-sm text-gray-500">
+                Online
+            </p>
         </div>
 
-            {/* Message Input */}
-            <div className="p-4 border-t">
-                <div className="flex gap-3">
-                    <input
-                        value={newMessage}
-                        onChange={(e)=>setNewMessage(e.target.value)}
-                        type="text"
-                        placeholder="Type a message..."
-                        className="input input-bordered flex-1"
-                    />
+        {/* Messages */}
+        <div className="flex-1 min-h-0 overflow-y-auto p-5">
 
-                    <button onClick={sendMessage} className="btn btn-primary">
-                        Send
-                    </button>
+            {messages.map((message, index) => (
+                <div
+                    key={index}
+                    className={`chat ${
+                        message.senderId === userId
+                            ? "chat-end"
+                            : "chat-start"
+                    }`}
+                >
+                    <div className="chat-bubble">
+                        {message.text}
+                    </div>
                 </div>
-            </div>
+            ))}
 
         </div>
+
+        {/* Message Input */}
+        <div className="p-4 border-t shrink-0">
+            <div className="flex gap-3">
+
+                <input
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    type="text"
+                    placeholder="Type a message..."
+                    className="input input-bordered flex-1"
+                />
+
+                <button
+                    onClick={sendMessage}
+                    className="btn btn-primary"
+                >
+                    Send
+                </button>
+
+            </div>
+        </div>
+
     </div>
+</div>
 </div>
     );
 }
